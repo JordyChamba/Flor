@@ -1,3 +1,20 @@
+@media (max-width: 768px) {
+  .corner-gifs img {
+    width: 80px;
+  }
+  .gif-top-right {
+    margin: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .corner-gifs img {
+    width: 55px;
+  }
+  .gif-top-right {
+    margin: 3px;
+  }
+}
 /* Reset y configuración base */
 * {
   margin: 0;
@@ -339,8 +356,8 @@ body {
   border: 1px solid rgba(255, 215, 0, 0.3);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   animation: fadeInUp 0.5s ease-out;
-  max-height: none;
-  overflow-y: visible;
+  max-height: 80vh;
+  overflow-y: auto;
   opacity: 1 !important;
   display: block !important;
 }
@@ -747,5 +764,27 @@ body {
   .welcome-subtitle,
   .flowers-subtitle {
     font-size: 1.1rem;
+  }
+
+  /* General positioning for the GIF */
+  .corner-gifs {
+    /* No position, para que no limite el gif */
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  .corner-gifs img {
+    width: 120px; /* tamaño fijo */
+    height: auto;
+    z-index: 1000;
+    pointer-events: none; /* no bloquea clics */
+  }
+
+  .gif-top-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    z-index: 1100;
   }
 }

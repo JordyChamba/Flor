@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flores Amarillas - Un Poema de Amor</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Página de Bienvenida -->
+    <div id="welcome-page" class="page active">
+      <div class="stars"></div>
+      <div class="floating-petals"></div>
+
+      <div class="welcome-content">
+        <div class="title-container">
+          <h1 class="main-title">Estas Flores Amarillas son para tuuu! :D</h1>
+          <div class="subtitle-line"></div>
+          <p class="welcome-subtitle">Un viaje hacia tu corazón helado</p>
+        </div>
+
+        <div class="welcome-message">
+          <p class="poetic-text">
+            En el jardín de los sueños,<br />
+            donde la luz danza con la brisa,<br />
+            nacen las flores más hermosas<br />
+            que el alma puede imaginar...
+          </p>
+        </div>
+
+        <button class="continue-btn" onclick="nextPage()">
+          <span>Continuar</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Página del Poema -->
+    <div id="poem-page" class="page">
+      <div class="poem-background"></div>
+      <div class="falling-petals"></div>
+
+      <div class="poem-content">
+        <div class="poem-container">
+          <h2 class="poem-title">Este poema es para tuuu! :3</h2>
+
+          <div class="poem-text">
+            <p class="poem-line">
+              Como las flores amarillas que brillan al amanecer,
+            </p>
+            <p class="poem-line">así es tu sonrisa iluminando mi amanecer,</p>
+            <p class="poem-line">tocando cada rincón silente</p>
+            <p class="poem-line">con la calma de tu ser.</p>
+
+            <br />
+
+            <p class="poem-line">En cada pétalo que cae suavemente,</p>
+            <p class="poem-line">veo un reflejo de tu ternura,</p>
+            <p class="poem-line">como una danza tranquila</p>
+            <p class="poem-line">bajo el cielo sereno del invierno.</p>
+
+            <br />
+
+            <p class="poem-line">Las flores amarillas susurran tu nombre,</p>
+            <p class="poem-line">y en su aroma hallo quietud,</p>
+            <p class="poem-line">porque hay algo en ti que me abraza,</p>
+            <p class="poem-line">como un rincón seguro de luz.</p>
+          </div>
+        </div>
+
+        <button class="continue-btn" onclick="nextPage()">
+          <span>Ver las Flores</span>
+          <div class="btn-glow"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Página de Animación de Flores -->
+    <div id="flowers-page" class="page">
+      <div class="flowers-background"></div>
+      <div class="animated-flowers"></div>
+      <div class="sparkles"></div>
+
+      <div class="flowers-content">
+        <h2 class="flowers-title">Este Jardín lo hice para ti :3</h2>
+        <p class="flowers-subtitle">
+          Déjate llevar por la magia de las flores amarillas
+        </p>
+
+        <div class="flower-controls">
+          <button class="control-btn" onclick="changeWind()">
+            Cambiar Viento
+          </button>
+          <button class="control-btn" onclick="addFlowers()">Más Flores</button>
+          <button class="control-btn" onclick="resetGarden()">Reiniciar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

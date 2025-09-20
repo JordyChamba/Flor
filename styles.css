@@ -1,0 +1,751 @@
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+body {
+  font-family: "Cormorant Garamond", serif;
+  /* Opción A: fondo fijo general */
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  margin: 0;
+  width: 100%;
+  height: 100vh; /* 👈 ocupa solo la pantalla */
+  position: relative; /* 👈 ya no fixed */
+}
+
+/* Configuración de páginas */
+.page {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* Cada página ocupa toda la pantalla */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.page.active {
+  opacity: 1; /* Página activa visible */
+  z-index: 10; /* Se coloca al frente */
+}
+
+/* ===== PÁGINA DE BIENVENIDA ===== */
+#welcome-page {
+  background: linear-gradient(
+    135deg,
+    #2c1810 0%,
+    #8b4513 30%,
+    #daa520 70%,
+    #ffd700 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Estrellas animadas */
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+    radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+    radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+    radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+    radial-gradient(2px 2px at 160px 30px, #fff, transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: sparkle 3s linear infinite;
+}
+
+@keyframes sparkle {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
+
+/* Pétalos flotantes */
+.floating-petals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.floating-petals::before,
+.floating-petals::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #ffd700 0%, #ffed4e 50%, transparent 70%);
+  border-radius: 50% 0 50% 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-petals::before {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floating-petals::after {
+  top: 60%;
+  right: 15%;
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+/* Contenido de bienvenida */
+.welcome-content {
+  height: auto; /* 👈 que se ajusten al contenido */
+  min-height: 100%; /* 👈 mínimo pantalla completa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-container {
+  margin-bottom: 2rem;
+  animation: fadeInUp 2s ease-out;
+}
+
+.main-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  margin-bottom: 1rem;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+  to {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 40px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.subtitle-line {
+  width: 200px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ffd700, transparent);
+  margin: 1rem auto;
+  animation: expand 2s ease-out 1s both;
+}
+
+@keyframes expand {
+  from {
+    width: 0;
+  }
+  to {
+    width: 200px;
+  }
+}
+
+.welcome-subtitle {
+  font-family: "Playfair Display", serif;
+  font-size: 1.5rem;
+  color: #fff;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.welcome-message {
+  margin: 2rem 0;
+  animation: fadeInUp 2s ease-out 1.5s both;
+}
+
+.poetic-text {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-style: italic;
+}
+
+/* Botón de continuar */
+.continue-btn {
+  position: relative;
+  background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+  background-size: 200% 200%;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c1810;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.5s ease-out 0.5s both,
+    gradientShift 3s ease-in-out infinite;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.continue-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+}
+
+.continue-btn .btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.continue-btn:hover .btn-glow {
+  left: 100%;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== PÁGINA DEL POEMA ===== */
+#poem-page {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 50%, #11998e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.poem-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* fondo detrás de todo */
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    );
+}
+.falling-petals {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* pétalos debajo del contenido */
+  overflow: hidden;
+}
+
+.falling-petals::before,
+.falling-petals::after,
+.falling-petals::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #ffd700 0%, #ffed4e 50%, transparent 70%);
+  border-radius: 50% 0 50% 0;
+  animation: fall 8s linear infinite;
+}
+
+.falling-petals::before {
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.falling-petals::after {
+  left: 50%;
+  animation-delay: 2s;
+}
+
+.falling-petals::after {
+  left: 80%;
+  animation-delay: 4s;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.poem-content {
+  position: relative;
+  z-index: 10; /* Contenido por encima del fondo y pétalos */
+  height: auto; /* se ajusta al contenido */
+  min-height: 100%; /* mínimo pantalla completa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.poem-container {
+  position: relative;
+  z-index: 11; /* asegura que el contenedor de poema quede encima de los pétalos */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.5s ease-out;
+  max-height: none;
+  overflow-y: visible;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+.poem-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 3rem;
+  color: #ffd700;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.poem-text {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.poem-line {
+  font-size: 1.4rem;
+  line-height: 2;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  animation: fadeInLine 1s ease-out forwards;
+}
+
+.poem-line:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.poem-line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.poem-line:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.poem-line:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.poem-line:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.poem-line:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.poem-line:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.poem-line:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.poem-line:nth-child(11) {
+  animation-delay: 0.9s;
+}
+.poem-line:nth-child(12) {
+  animation-delay: 1s;
+}
+.poem-line:nth-child(13) {
+  animation-delay: 1.1s;
+}
+.poem-line:nth-child(14) {
+  animation-delay: 1.2s;
+}
+
+@keyframes fadeInLine {
+  from {
+    opacity: 1;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== PÁGINA DE FLORES ANIMADAS ===== */
+#flowers-page {
+  background: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.flowers-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 215, 0, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 215, 0, 0.2) 0%,
+      transparent 50%
+    );
+}
+
+.animated-flowers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.flower {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  animation: flowerGrow 3s ease-out forwards;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.flower::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #ffd700 0%, #ffed4e 50%, #ffa500 100%);
+  border-radius: 50% 0 50% 0;
+  transform: rotate(45deg);
+  animation: flowerRotate 4s ease-in-out infinite;
+}
+
+.flower::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #8b4513;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes flowerGrow {
+  from {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes flowerRotate {
+  0%,
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(225deg) scale(1.1);
+  }
+}
+
+.sparkles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.flowers-content {
+  height: auto; /* 👈 que se ajusten al contenido */
+  min-height: 100%; /* 👈 mínimo pantalla completa */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flowers-title {
+  font-family: "Dancing Script", cursive;
+  font-size: 3.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  animation: fadeInUp 2s ease-out;
+}
+
+.flowers-subtitle {
+  font-size: 1.3rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  animation: fadeInUp 2s ease-out 0.5s both;
+}
+
+.flower-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 2s ease-out 1s both;
+}
+
+.control-btn {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.2),
+    rgba(255, 255, 255, 0.1)
+  );
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn:hover {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 215, 0, 0.4),
+    rgba(255, 255, 255, 0.2)
+  );
+  border-color: #ffd700;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+}
+
+.control-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.control-btn:hover::before {
+  left: 100%;
+}
+
+/* Animaciones generales */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll personalizado */
+.poem-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.poem-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.poem-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #ffd700, #ffed4e);
+  border-radius: 10px;
+}
+
+.poem-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ffed4e, #ffd700);
+}
+
+/* Efectos adicionales */
+.flower:hover {
+  transform: scale(1.3) !important;
+  filter: brightness(1.2);
+  z-index: 100;
+}
+
+.flower:hover::before {
+  animation-duration: 0.5s !important;
+}
+
+/* Efecto de partículas en el fondo */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+      1px 1px at 20px 30px,
+      rgba(255, 215, 0, 0.3),
+      transparent
+    ),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 215, 0, 0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 215, 0, 0.3), transparent);
+  background-size: 200px 100px;
+  animation: particleFloat 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-100px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .poem-title,
+  .flowers-title {
+    font-size: 2.5rem;
+  }
+
+  .poem-line {
+    font-size: 1.2rem;
+  }
+
+  .welcome-content,
+  .poem-content,
+  .flowers-content {
+    height: auto; /* Se ajusta al contenido */
+    min-height: 100%;
+  }
+
+  .poem-container {
+    padding: 1.5rem;
+    max-height: 85vh;
+  }
+
+  .flower-controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .control-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .continue-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .poem-title,
+  .flowers-title {
+    font-size: 2rem;
+  }
+
+  .poem-line {
+    font-size: 1.1rem;
+  }
+
+  .welcome-subtitle,
+  .flowers-subtitle {
+    font-size: 1.1rem;
+  }
+}
